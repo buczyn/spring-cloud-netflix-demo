@@ -50,5 +50,6 @@
 		<module>registry</module>
     
 		<module>news-service</module>
+		<module>articles-service</module>
 	</modules>
 </project>

@@ -1,0 +1,7 @@
+server:
+  port: 8766
+
+spring:
+  jackson:
+    serialization: 
+      indent-output: true
