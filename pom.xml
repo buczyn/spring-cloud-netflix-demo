@@ -48,5 +48,7 @@
 
 	<modules>
 		<module>registry</module>
+    
+		<module>news-service</module>
 	</modules>
 </project>
