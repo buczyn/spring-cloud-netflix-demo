@@ -40,6 +40,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
@@ -48,7 +53,8 @@
 
 	<modules>
 		<module>registry</module>
-    
+		<module>config</module>
+
 		<module>news-service</module>
 		<module>articles-service</module>
 	</modules>
