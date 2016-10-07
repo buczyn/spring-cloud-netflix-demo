@@ -3,6 +3,7 @@ package com.globallogic.samples.cloud.news.endpoints;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NewsController {
 
-	private static final String CONTENT = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tincidunt tincidunt augue.";
-
+	private ArticlesClient articlesClient;
 	private int defaultSize;
 
-	public NewsController(@Value("${news.top.defaultSize}") int defaultSize) {
+	@Autowired
+	public NewsController(ArticlesClient articlesClient, @Value("${news.top.defaultSize}") int defaultSize) {
+		this.articlesClient = articlesClient;
 		this.defaultSize = defaultSize;
 	}
 
@@ -30,8 +32,10 @@ public class NewsController {
 	private NewsList generateTopNews(int size) {
 		List<News> newsList = new ArrayList<News>();
 		for (int i = 1; i <= size; i++) {
-			newsList.add(new News("Headline " + i, CONTENT));
+			Article article = articlesClient.getArticle(Integer.toString(i));
+			newsList.add(new News(article.getTitle(), article.getText()));
 		}
 		return new NewsList(newsList);
 	}
+
 }
