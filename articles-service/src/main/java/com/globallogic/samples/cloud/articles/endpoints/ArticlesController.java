@@ -3,6 +3,7 @@ package com.globallogic.samples.cloud.articles.endpoints;
 import java.util.Date;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,19 @@ public class ArticlesController {
 	private Lorem lorem = LoremIpsum.getInstance();
 	private Random random = new Random();
 
+	@Value("${articles.random.title}")
+	private int titleLength;
+
+	@Value("${articles.random.text.min}")
+	private int paragraphsMin;
+
+	@Value("${articles.random.text.max}")
+	private int paragraphsMax;
+
 	@RequestMapping(path = "/articles/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Article getArticle(@PathVariable String id) {
-		String title = lorem.getTitle(5);
-		String text = lorem.getParagraphs(1, 3);
+		String title = lorem.getTitle(titleLength);
+		String text = lorem.getParagraphs(paragraphsMin, paragraphsMax);
 		Author author = new Author(lorem.getFirstName(), lorem.getLastName());
 		return new Article(id, title, text, author, randomDate());
 

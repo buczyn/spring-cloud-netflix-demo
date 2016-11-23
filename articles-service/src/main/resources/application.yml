@@ -1,7 +1,21 @@
 server:
   port: 8766
 
+articles:
+  random:
+    title: 5
+    text:
+      min: 1
+      max: 3
+
 spring:
   jackson:
     serialization: 
       indent-output: true
+
+---
+spring:
+  profiles: secondary
+
+server:
+  port: 8767
