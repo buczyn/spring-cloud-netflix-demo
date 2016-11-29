@@ -54,6 +54,7 @@
 	<modules>
 		<module>registry</module>
 		<module>config</module>
+		<module>admin</module>
 
 		<module>news-service</module>
 		<module>articles-service</module>
